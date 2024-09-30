@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "FF2F5BE7-9267-48F7-97EB-C26710BB1F6F",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Earthquakes.xcodeproj",
+      "identifier" : "CE6CC60F2CAAFBA600E03030",
+      "name" : "Earthquakes"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Earthquakes.xcodeproj",
+        "identifier" : "CE7A353E2CAB41F40043C48F",
+        "name" : "EarthquakesTests"
+      }
+    }
+  ],
+  "version" : 1
+}
