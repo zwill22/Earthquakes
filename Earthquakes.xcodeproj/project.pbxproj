@@ -22,9 +22,30 @@
 		CE7A354C2CAB49510043C48F /* Earthquakes.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Earthquakes.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CE7A35562CAD65D30043C48F /* Exceptions for "Earthquakes" folder in "Earthquakes" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/TestData.swift",
+			);
+			target = CE6CC60F2CAAFBA600E03030 /* Earthquakes */;
+		};
+		CE7A35572CAD65D30043C48F /* Exceptions for "Earthquakes" folder in "EarthquakesTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/TestData.swift",
+			);
+			target = CE7A353E2CAB41F40043C48F /* EarthquakesTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CE6CC6122CAAFBA600E03030 /* Earthquakes */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CE7A35562CAD65D30043C48F /* Exceptions for "Earthquakes" folder in "Earthquakes" target */,
+				CE7A35572CAD65D30043C48F /* Exceptions for "Earthquakes" folder in "EarthquakesTests" target */,
+			);
 			path = Earthquakes;
 			sourceTree = "<group>";
 		};
