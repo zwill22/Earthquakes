@@ -25,7 +25,7 @@ struct QuakeRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    var previewQuake = Quake(
+    let previewQuake = Quake(
         magnitude: 1.0,
         place: "Shakey Acres",
         time: Date(timeIntervalSinceNow: -1000),
