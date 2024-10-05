@@ -14,7 +14,29 @@ actor QuakeClient {
         get async throws {
             let data = try await downloader.httpData(from: feedURL)
             let allQuakes = try decoder.decode(GeoJSON.self, from: data)
-            return allQuakes.quakes
+            var updatedQuakes = allQuakes.quakes
+            if let olderThanOneHour = updatedQuakes.firstIndex(where: { $0.time.timeIntervalSinceNow > 3600 }) {
+                let indexRange = updatedQuakes.startIndex..<olderThanOneHour
+                try await withThrowingTaskGroup(of: (Int, QuakeLocation).self) { group in
+                    for index in indexRange {
+                        group.addTask {
+                            let location = try await self.quakeLocation(from: allQuakes.quakes[index].detail)
+                            return (index, location)
+                        }
+                    }
+                    
+                    while let result = await group.nextResult() {
+                        switch result {
+                        case .failure(let error):
+                            throw error
+                        case .success(let (index, location)):
+                            updatedQuakes[index].location = location
+                        }
+                    }
+                }
+            }
+            
+            return updatedQuakes
         }
     }
     
