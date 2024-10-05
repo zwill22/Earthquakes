@@ -9,6 +9,9 @@ import SwiftUI
 
 struct QuakeDetail: View {
     var quake: Quake
+    @EnvironmentObject private var quakesProvider: QuakesProvider
+    @State private var location: QuakeLocation? = nil
+    @State private var high_precision: Bool = false
     
     var body: some View {
         VStack {
@@ -18,10 +21,29 @@ struct QuakeDetail: View {
                 .bold()
             Text("\(quake.time.formatted())")
                 .foregroundStyle(Color.secondary)
-            if let location = quake.location {
-                // TODO Add Tap gesture to switch precision of values
-                Text("Latitude: \(location.latitude.formatted(.number.precision(.fractionLength(3))))")
-                Text("Longitude: \(location.longitude.formatted(.number.precision(.fractionLength(3))))")
+            if let location = self.location {
+                if high_precision {
+                    Text("Latitude: \(location.latitude.formatted())")
+                    Text("Longitude: \(location.longitude.formatted())")
+                } else {
+                    Text("Latitude: \(location.latitude.formatted(.number.precision(.fractionLength(3))))")
+                    Text("Longitude: \(location.longitude.formatted(.number.precision(.fractionLength(3))))")
+                }
+            }
+        }.onTapGesture {
+            if high_precision {
+                high_precision = false
+            } else {
+                high_precision = true
+            }
+        }
+        .task {
+            if self.location == nil {
+                if let quakeLocation = quake.location {
+                    self.location = quakeLocation
+                } else {
+                    self.location = try? await quakesProvider.location(for: quake)
+                }
             }
         }
     }
